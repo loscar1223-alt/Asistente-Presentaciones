@@ -6,8 +6,6 @@ Sin importaciones de scripts internos al nivel de módulo.
 import shutil, subprocess, json, re, copy, io, zipfile
 from pathlib import Path
 
-import openpyxl
-# pptx imports
 from pptx import Presentation
 from pptx.util import Pt
 from pptx.oxml.ns import qn
@@ -37,6 +35,7 @@ def fmt_pct(v):
     return "–" if v is None else f"{v*100:+.1f}%"
 
 def inject_data(input_path, work_xlsx):
+    import openpyxl
     wb_in  = openpyxl.load_workbook(input_path)
     ws_in  = wb_in["Principal"]
     wb_tpl = openpyxl.load_workbook(work_xlsx)
@@ -54,6 +53,7 @@ def recalc(work_xlsx):
     )
 
 def read_data(work_xlsx):
+    import openpyxl
     wb = openpyxl.load_workbook(work_xlsx, data_only=True)
     ws = wb["02_Marca_OUTPUT"]
     g  = lambda r, c: ws.cell(r, c).value
@@ -320,6 +320,7 @@ def build_multilevel_pptx(template_pptx, out_path, levels_data):
     out_path.write_bytes(clean.getvalue())
 
 def process_nivel(input_path, template_xlsx, workdir, nivel):
+    import openpyxl
     work_xlsx = workdir / f"work_{nivel}.xlsx"
     shutil.copy(template_xlsx, work_xlsx)
 
