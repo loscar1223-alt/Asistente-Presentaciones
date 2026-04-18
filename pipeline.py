@@ -20,7 +20,7 @@ from pathlib import Path
 
 import defusedxml.minidom
 
-from helpers.merge_runs import merge_runs as do_merge_runs
+
 from helpers.simplify_redlines import simplify_redlines as do_simplify_redlines
 
 SMART_QUOTE_REPLACEMENTS = {
